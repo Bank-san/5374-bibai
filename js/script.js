@@ -566,6 +566,17 @@ $(function() {
               leftDayText = leftDay + "日後";
             }
 	  }
+    // .accordion-table をクリックしたときに対応する .accordion-body を開閉する
+    $("#accordion").on("click", ".accordion-table", function(e) {
+      e.preventDefault();
+      var $toggle = $(this).closest(".accordion-toggle");
+      var targetSelector = $toggle.attr("href"); // 例: "#collapse0"
+      var $target = $(targetSelector);
+
+      // トグル（開いてたら閉じる、閉じてたら開く）
+      $target.collapse("toggle");
+    });
+
 
           styleHTML += '#accordion-group' + d_no + '{background-color:  ' + description.background + ';} ';
 
@@ -584,7 +595,7 @@ $(function() {
             '<h6><p class="text-left date">' + dateLabel + "</p></h6>" +
             "</a>" +
             "</div>" +
-            '<div id="collapse' + i + '" class="accordion-body collapse in">' +
+            '<div id="collapse' + i + '" class="accordion-body collapse">' +
             '<div class="accordion-inner">' +
             (description.sublabel ? "<strong>" + description.sublabel + "</strong><br/>" : "") +
             (description.description ? "<p>" + description.description + "</p><br/>" : "") +
