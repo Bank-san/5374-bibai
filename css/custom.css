@@ -30,6 +30,12 @@ a:hover {
 #accordion .accordion-inner ul {
 	color: #ffffff;
 }
+
+#accordion .accordion-inner p,
+#accordion .accordion-inner strong {
+	color: #fff;  /* 任意の読みやすい文字色 */
+}
+
 #accordion .accordion-heading .accordion-table {
 	display: table-cell;
 	vertical-align: middle;
