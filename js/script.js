@@ -584,12 +584,15 @@ $(function() {
             '<h6><p class="text-left date">' + dateLabel + "</p></h6>" +
             "</a>" +
             "</div>" +
-            '<div id="collapse' + i + '" class="accordion-body collapse">' +
+            '<div id="collapse' + i + '" class="accordion-body collapse in">' +
             '<div class="accordion-inner">' +
-            description.description + "<br />" + target_tag +
+            (description.sublabel ? "<strong>" + description.sublabel + "</strong><br/>" : "") +
+            (description.description ? "<p>" + description.description + "</p><br/>" : "") +
+            target_tag +
             '<div class="targetDays"></div></div>' +
             "</div>" +
             "</div>";
+
       }
     }
 
