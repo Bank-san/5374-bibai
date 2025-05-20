@@ -566,16 +566,8 @@ $(function() {
               leftDayText = leftDay + "日後";
             }
 	  }
-    // .accordion-table をクリックしたときに対応する .accordion-body を開閉する
-    $("#accordion").on("click", ".accordion-table", function(e) {
-      e.preventDefault();
-      var $toggle = $(this).closest(".accordion-toggle");
-      var targetSelector = $toggle.attr("href"); // 例: "#collapse0"
-      var $target = $(targetSelector);
 
-      // トグル（開いてたら閉じる、閉じてたら開く）
-      $target.collapse("toggle");
-    });
+    
 
 
           styleHTML += '#accordion-group' + d_no + '{background-color:  ' + description.background + ';} ';
@@ -583,7 +575,7 @@ $(function() {
           accordionHTML +=
             '<div class="accordion-group" id="accordion-group' + d_no + '">' +
             '<div class="accordion-heading">' +
-            '<a class="accordion-toggle" style="height:' + accordion_height + 'px" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '">' +
+            '<a class="accordion-toggle" style="height:' + accordion_height + 'px" data-toggle="collapse" data-target="#collapse' + i + '" data-parent="#accordion" href="#collapse' + i + '">'+
             '<div class="left-day">' + leftDayText + '</div>' +
             '<div class="accordion-table" >';
           if (ableSVG && SVGLabel) {
@@ -612,7 +604,15 @@ $(function() {
     var accordion_elm = $("#accordion");
     accordion_elm.html(accordionHTML);
 
-    $('html,body').animate({scrollTop: 0}, 'fast');
+    $("#accordion").off("click", ".accordion-table");
+    $("#accordion").on("click", ".accordion-table", function (e) {
+      e.preventDefault();
+      var $toggle = $(this).closest(".accordion-toggle");
+      var targetSelector = $toggle.attr("data-target");
+      var $target = $(targetSelector);
+      $target.collapse("toggle");
+    });
+    
 
     //アコーディオンのラベル部分をクリックしたら
     $(".accordion-body").on("shown.bs.collapse", function() {
